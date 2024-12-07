@@ -7,13 +7,38 @@ services:
       args:
         ENV_VARIABLE: ${ENV_VARIABLE}
         NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+        DATABASE_URL: ${DATABASE_URL}
+
     restart: always
     ports:
       - 3000:3000
+    depends_on:
+      - postgres
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      ENV_VARIABLE: ${ENV_VARIABLE}
+      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
     networks:
       - my_network
 
   # Add more containers below (nginx, postgres, etc.)
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - 5433:5432
+    networks:
+      - my_network
+
+volumes:
+  postgres_data:
+
 
 # Define a network, which allows containers to communicate
 # with each other, by using their container name as a hostname
