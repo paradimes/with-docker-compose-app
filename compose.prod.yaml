@@ -1,14 +1,14 @@
+# compose.prod.yaml
 services:
   next-app:
     container_name: next-app
     build:
       context: ./next-app
       dockerfile: prod.Dockerfile
-      args:
-        ENV_VARIABLE: ${ENV_VARIABLE}
-        NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
-        DATABASE_URL: ${DATABASE_URL}
-
+      # args:
+      #   ENV_VARIABLE: ${ENV_VARIABLE}
+      #   NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      #   DATABASE_URL: ${DATABASE_URL}
     restart: always
     ports:
       - 3000:3000
@@ -16,8 +16,8 @@ services:
       - postgres
     environment:
       DATABASE_URL: ${DATABASE_URL}
-      ENV_VARIABLE: ${ENV_VARIABLE}
-      NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
+      # ENV_VARIABLE: ${ENV_VARIABLE}
+      # NEXT_PUBLIC_ENV_VARIABLE: ${NEXT_PUBLIC_ENV_VARIABLE}
     networks:
       - my_network
 
