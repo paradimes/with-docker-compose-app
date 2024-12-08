@@ -69,7 +69,7 @@ export default function Home() {
   };
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={{ margin: "50px" }}>
       <Head>
         <title>Task Manager</title>
         <link rel="icon" href="/favicon.ico" />
